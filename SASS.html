@@ -1,0 +1,105 @@
+<!-- _________________________________________________________________ -->
+<!--  Use @for loop   -->
+
+<style type="text/scss">
+  @for $i from 1 through 5 {
+    /* iterate 1 throught 5 (including 5) */
+    .text-#{$i} {
+      font-size: 15px * $i;
+    } /* .text-1(2,3,4,5) */
+    /* .text-i font-size: 15px *1(2,3,4,5) */
+  }
+</style>
+
+<p class="text-1">Hello</p>
+<!-- font-size: 15px-->
+<p class="text-2">Hello</p>
+<!-- font-size: 30px-->
+<p class="text-3">Hello</p>
+<!-- font-size: 45px-->
+<p class="text-4">Hello</p>
+<!-- etc -->
+<p class="text-5">Hello</p>
+
+<!-- _________________________________________________________________ -->
+<!--  Use @each to map over items   -->
+
+<style type="text/scss">
+  @each $color in blue, black, red {
+    /* iterate through $blue/black/red */
+    .#{$color}-bg {
+      /* class $color(-box) */
+      background-color: $color; /* assign background-color: $color */
+    }
+  }
+
+  div {
+    height: 200px;
+    width: 200px;
+  }
+</style>
+
+<div class="blue-box"></div>
+<div class="black-box"></div>
+<div class="red-box"></div>
+
+<!-- _________________________________________________________________ -->
+<!-- apply until condition doesn't apply with @while -->
+
+<style type="text/scss">
+  $i: 1; /* set initial variable to number */
+  @while $i < 6 {
+    /* condition */
+    .text-#{$i} {
+      font-size: 15px * $i;
+    } /* class text-(1-5) {set font-size 15px * i (1-5)} */
+    $i: $i + 1; /* i = + 1, iterate */
+  }
+</style>
+
+<p class="text-1">Hello</p>
+<p class="text-2">Hello</p>
+<p class="text-3">Hello</p>
+<p class="text-4">Hello</p>
+<p class="text-5">Hello</p>
+
+<!-- _________________________________________________________________ -->
+<!-- Split Your Styles into Smaller Chunks with Partials -->
+
+<!-- partials are code in separate files that are later imported-->
+
+<!-- name blueprint: _blahblah.scss   -->
+
+@import "variables"
+
+<!-- _________________________________________________________________ -->
+<!-- Extend a set of CSS styles to another element -->
+
+<style type="text/scss">
+  h3 {
+    text-align: center;
+  }
+  .info {
+    width: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+  }
+  .info-important {
+    background-color: magenta;
+    @extend .info; /* copy .info css rules */
+  }
+</style>
+<h3>Posts</h3>
+<div class="info-important">
+  <p>
+    This is an important post. It should extend the class ".info" and have its
+    own CSS styles.
+  </p>
+</div>
+
+<div class="info">
+  <p>
+    This is a simple post. It has basic styling and can be extended for other
+    uses.
+  </p>
+</div>
